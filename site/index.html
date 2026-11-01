@@ -3,30 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' https://api.github.com; frame-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' https://api.github.com; frame-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow">
-<title>paperwriter</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f5d8a'/%3E%3Cpath d='M9 8h10l5 5v11H9z' fill='%23fff'/%3E%3Cpath d='M12 16h9M12 19.5h9M12 23h6' stroke='%232f5d8a' stroke-width='1.6'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
-<script src="vendor/marked-12.0.2.min.js"></script>
-<script src="vendor/purify-3.1.6.min.js"></script>
-<script src="vendor/js-yaml-4.1.0.min.js"></script>
-<script type="module" src="app.js"></script>
+<title>Sign in</title>
+<link rel="icon" href="data:,">
+<style id="lock-style">
+  :root { color-scheme: light dark; --bg: #f6f7f9; --fg: #1c2430; --card: #fff; --line: #dde2e8; --accent: #2f5d8a; --bad: #b03a2e; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #12161c; --fg: #e6eaf0; --card: #1a2028; --line: #2e3844; --accent: #7fb0e0; --bad: #f08a7e; } }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; width: 100%; max-width: 320px;
+    display: flex; flex-direction: column; gap: 10px; }
+  form[hidden] { display: none; }
+  label { font-weight: 600; font-size: .92rem; }
+  input[type=password] { font: inherit; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: inherit; }
+  .keep { font-weight: 400; display: flex; gap: 8px; align-items: center; font-size: .88rem; }
+  button { font: inherit; font-weight: 600; padding: 9px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+  button:disabled { opacity: .6; }
+  #msg { min-height: 1.2em; margin: 0; font-size: .88rem; color: var(--bad); }
+</style>
+<script src="u.js" defer></script>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#/"><span class="logo" aria-hidden="true"></span>paperwriter</a>
-  <nav class="nav" aria-label="Main">
-    <a href="#/" data-nav="papers">Papers</a>
-    <a href="#/new" data-nav="new">New paper</a>
-    <a href="#/help" data-nav="help">How it works</a>
-    <a href="#/settings" data-nav="settings">Connection</a>
-  </nav>
-  <span id="repo-badge" class="repo-badge" hidden></span>
-</header>
-<main id="app" tabindex="-1"><p class="muted pad">Loading…</p></main>
-<div id="toast" role="status" aria-live="polite"></div>
-<noscript><p class="pad">paperwriter needs JavaScript.</p></noscript>
+<form id="lock" hidden autocomplete="off">
+  <label for="pw">Password</label>
+  <input id="pw" type="password" autocomplete="current-password" required>
+  <label class="keep"><input id="keep" type="checkbox" checked> Stay unlocked in this tab</label>
+  <button type="submit">Unlock</button>
+  <p id="msg" role="alert"></p>
+</form>
 </body>
 </html>

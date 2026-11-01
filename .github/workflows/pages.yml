@@ -1,12 +1,8 @@
-# Publishes site/ to GitHub Pages. The site holds no paper content: it loads everything from your
-# private paperwriter repository at run time, through the GitHub API, with your own token.
-# One-time setup: Settings > Pages > Source: "GitHub Actions".
 name: Deploy
 
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
